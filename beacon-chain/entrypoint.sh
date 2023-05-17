@@ -4,8 +4,8 @@
 [[ -n $CHECKPOINT_SYNC_URL ]] && EXTRA_OPTS="--initial-state=${CHECKPOINT_SYNC_URL}/eth/v2/debug/beacon/states/finalized ${EXTRA_OPTS}"
 
 exec /opt/teku/bin/teku \
-    --network=/usr/config.yaml \
-    --initial-state=/usr/genesis.ssz \
+    --network=/usr/testnet_data/config.yaml \
+    --initial-state=/usr/testnet_data/genesis.ssz \
     --data-base-path=/opt/teku/data \
     --ee-endpoint=$HTTP_ENGINE \
     --ee-jwt-secret-file="/jwtsecret" \

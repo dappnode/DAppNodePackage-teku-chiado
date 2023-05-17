@@ -2,12 +2,6 @@ ARG UPSTREAM_VERSION
 FROM consensys/teku:$UPSTREAM_VERSION
 
 USER root
-RUN  apt-get update \
-    && apt-get install -y wget \
-    && rm -rf /var/lib/apt/lists/* \
-    && wget -q https://raw.githubusercontent.com/gnosischain/configs/main/chiado/config.yaml -O  /usr/config.yaml && \
-    wget -q https://github.com/gnosischain/configs/blob/main/chiado/genesis.ssz?raw=true -O /usr/genesis.ssz
-    
 
 ########
 # TEKU #
@@ -21,6 +15,7 @@ RUN chown -R 1001:1001 /opt/teku/data
 
 ENV JAVA_OPTS="-Xmx4g"
 
+COPY chiado /usr/testnet_data
 COPY entrypoint.sh /usr/bin/entrypoint.sh
 COPY jwtsecret.hex /jwtsecret
 RUN chmod +x /usr/bin/entrypoint.sh
